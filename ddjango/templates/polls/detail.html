@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="{% url 'polls:vote' poll.id %} " method="post">
+    {% for foo in poll.choice_set.all %}
+        {% csrf_token %}
+        <input type="radio" id="choice{{ forloop.counter }}" name="vote" value="{{ foo.id }}">
+        <label for="choice{{ forloop.counter }}">{{ foo.choice_text }}</label>
+    {% endfor %}
+
+    <input type="submit" value="提交">
+</form>
+
+<p style="color: red">{{ message }}</p>
+
+
+</body>
+</html>
